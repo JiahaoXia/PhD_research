@@ -1,0 +1,7 @@
+1.	Import StateSAT.csv file (https://libguides.rutgers.edu/c.php?g=336179&p=2271779) into a pandas dataframe and show its first 5 rows	 (15 pts)
+2.	Show the summary statistics of each numeric column (including count, mean, std, min, and max)								(10 pts)
+3.	Print the rows with SAT_TOTAL greater than 1080			(15 pts)
+4.	Print all the rows that the REGION is in Northeast			(15 pts)
+5.	Print the 13th row and the last 3 columns of the dataframe		(15 pts)
+6.	Plot all the SAT_MATH values using barplot				(15 pts)
+7.	Plot a scatter of ‘PERCENT_TAKING’ against SAT_TOTAL		(15 pts)
