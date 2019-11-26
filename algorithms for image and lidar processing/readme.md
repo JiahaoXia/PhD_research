@@ -10,6 +10,6 @@
 #### * [BRIEF (Binary Robust Independent Elementary Features)](https://link.springer.com/chapter/10.1007/978-3-642-15561-1_56)
 #### * [ORB (Oriented FAST and Rotated BRIEF)](http://www.willowgarage.com/sites/default/files/orb_final.pdf)
 ### edge detection
-#### * [EDISON]
+#### * [EDISON (Edge Detection and Image SegmentatiON)]
 
 ## Point Cloud Processing
