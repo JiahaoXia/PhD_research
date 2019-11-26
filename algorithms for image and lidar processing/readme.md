@@ -11,5 +11,10 @@
 #### * [ORB (Oriented FAST and Rotated BRIEF)](http://www.willowgarage.com/sites/default/files/orb_final.pdf)
 ### edge detection
 #### * [EDISON (Edge Detection and Image SegmentatiON)]
+#### * [ASIFT]
+#### * [MI (Mutual Information)]
 
 ## Point Cloud Processing
+### 3D matching
+#### * [ICP (iterative closest point)]
+#### * [NDT (normal distributions transform)]
