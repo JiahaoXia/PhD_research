@@ -11,18 +11,17 @@ import math
 
 os.chdir('F://Staten Island//Staten Island//')
 
-def las_visualization(las_data, title, color, outfile):
+def pointcloud_visualization(x, y, z, title, color, outfile):
     """
-    Visualization of .las
-    :param las_data: .las
+    Visualization of point cloud
+    :param x: x coordinate of point cloud
+    :param y: y coordinate of point cloud
+    :param z: z coordinate of point cloud
     :param title: the title of the figure
     :param color: the color of the point cloud
     :param outfile: where the figure is saved
     :return: no return
     """
-    x = las_data.x
-    y = las_data.y
-    z = las_data.z
     # figure dpi
     fig = plt.figure(dpi=120)
     ax = fig.add_subplot(111, projection='3d')
@@ -96,6 +95,8 @@ for i in range(1):
 
     if temp_las_file != 'NoBlock':
         temp_image = cv2.imread('20121205A//' + temp_image_file)
+        height = temp_image.shape[0]
+        width = temp_image.shape[1]
         temp_las = File('las//' + temp_las_file)
         # las_visualization(temp_las, temp_las_file, 'r', temp_las_file[0:-4]+'.jpg')
         temp_cam_no = int(temp_image_file.split('_')[1][-1])
@@ -114,3 +115,19 @@ for i in range(1):
         rotation_matrix = cal_rotation_matrix(math.radians(heading),
                                               math.radians(roll),
                                               math.radians(pitch))
+        # (X_P, Y_P, Z_P) - (X_S, Y_S, Z_S)
+        temp_las_X = temp_las.x - img_Xs
+        temp_las_Y = temp_las.Y - img_Ys
+        temp_las_Z = temp_las.Z - img_Zs
+        # (x,y)--->(x-x0,y-y0,-f)
+        temp_img_x = np.concatenate((np.arange(-0.5-height/2, -0.5, 1), np.arange(0.5, 0.5+height/2, 1)), axis=0)*0.000006
+        temp_img_x = temp_img_x.reshape(-1,1).repeat(width, axis=1)
+        temp_img_x = temp_img_x - cam_x0
+        temp_img_y = np.concatenate((np.arange(-0.5-width/2, -0.5, 1), np.arange(0.5, 0.5+width/2, 1)), axis=0)*0.000006
+        temp_img_y = temp_img_y.reshape(1,-1).repeat(height, axis=0)
+        temp_img_y = temp_img_y - cam_y0
+        # image pixel coordinate (x, y, -f) 3*n
+        temp_img_matrix = np.concatenate((temp_img_x.reshape(1,-1), temp_img_y.reshape(1,-1), np.full((1,height*width), cam_f)), axis=0)
+        # projection image--->point cloud
+        temp_img2pc = np.dot(rotation_matrix, temp_img_matrix)
+        pointcloud_visualization(x=temp_img2pc[0,:], y=temp_img2pc[1,:], z=temp_img2pc[2,:], title='Image-Point Cloud', color='r', outfile='Image2PointCloud.jpg')
