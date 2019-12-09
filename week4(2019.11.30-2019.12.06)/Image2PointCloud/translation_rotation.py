@@ -130,4 +130,4 @@ for i in range(1):
         temp_img_matrix = np.concatenate((temp_img_x.reshape(1,-1), temp_img_y.reshape(1,-1), np.full((1,height*width), cam_f)), axis=0)
         # projection image--->point cloud
         temp_img2pc = np.dot(rotation_matrix, temp_img_matrix)
-        pointcloud_visualization(x=temp_img2pc[0,:], y=temp_img2pc[1,:], z=temp_img2pc[2,:], title='Image-Point Cloud', color='r', outfile='Image2PointCloud.jpg')
+        pointcloud_visualization(x=temp_img2pc[0,:], y=temp_img2pc[1,:], z=temp_img2pc[2,:], title='Image Point Cloud', color='r', outfile='Image2PointCloud.jpg')
