@@ -20,4 +20,4 @@ plt.show()
 
 # read RGB image
 test_img = cv2.imread("survey1_Cam1_000686.jpg")
-r, g, b = cv2.split(test_img)
+b, g, r = cv2.split(test_img)
